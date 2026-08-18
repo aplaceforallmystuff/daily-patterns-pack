@@ -210,4 +210,4 @@ MIT — Use freely, build on it, make it yours.
 
 ---
 
-*Part of the Cerebro plugin ecosystem. Start small, compound over time.*
+*Part of the Claude Code plugin ecosystem. Start small, compound over time.*
