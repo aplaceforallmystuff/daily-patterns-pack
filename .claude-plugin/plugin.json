@@ -1,6 +1,21 @@
 {
   "name": "daily-patterns-pack",
+  "displayName": "Daily Patterns Pack",
   "description": "Log Claude Code sessions to Obsidian daily notes, analyze patterns, and build automations. A feedback loop that learns how you work.",
   "version": "1.0.0",
-  "author": { "name": "Jim Christian", "email": "hello@jimchristian.net" }
+  "author": {
+    "name": "Jim Christian",
+    "email": "hello@jimchristian.net",
+    "url": "https://jimchristian.net"
+  },
+  "homepage": "https://github.com/aplaceforallmystuff/daily-patterns-pack#readme",
+  "repository": "https://github.com/aplaceforallmystuff/daily-patterns-pack",
+  "license": "MIT",
+  "keywords": [
+    "obsidian",
+    "daily-notes",
+    "productivity",
+    "patterns",
+    "automation"
+  ]
 }

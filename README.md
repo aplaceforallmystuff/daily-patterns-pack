@@ -1,20 +1,19 @@
-# Daily Patterns Pack for Claude Code + Obsidian
+# Daily Patterns Pack
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Claude Code](https://img.shields.io/badge/Claude_Code-Compatible-blue)](https://claude.ai/claude-code)
-[![Obsidian](https://img.shields.io/badge/Obsidian-Required-purple)](https://obsidian.md)
+*Turn your daily notes into a system that learns how you work.*
 
-![Architecture](docs/images/architecture-diagram.png)
+![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)
+![Claude Code Plugin](https://img.shields.io/badge/Claude%20Code-Plugin-6C5CE7)
+
+![Daily Patterns Pack](docs/images/architecture-diagram.png)
+
+A two-tool feedback loop: capture what you do, discover what you should automate.
 
 ## Demo Video
 
 [![How 3 Weeks of Daily Notes Built My AI Agents](https://img.youtube.com/vi/ZztxFamiMa8/maxresdefault.jpg)](https://www.youtube.com/watch?v=ZztxFamiMa8)
 
-**Turn your daily notes into a system that learns how you work.**
-
-A two-tool feedback loop: capture what you do, discover what you should automate.
-
-## The Problem
+## Why
 
 You use Claude Code. You get things done. But then:
 
@@ -25,7 +24,41 @@ You use Claude Code. You get things done. But then:
 
 Claude doesn't remember between sessions. Your daily notes do—but only if you write to them, and only if something reads them back.
 
-## The Solution
+## Install
+
+```bash
+# In Claude Code:
+/plugin marketplace add aplaceforallmystuff/marketplace
+/plugin install daily-patterns-pack@jim-christian
+```
+
+<details>
+<summary>Manual install (without the marketplace)</summary>
+
+```bash
+# Clone the pack
+git clone https://github.com/aplaceforallmystuff/daily-patterns-pack.git
+cd daily-patterns-pack
+
+# Run the installer
+./install.sh
+
+# Or manually copy
+cp -r skills/log-to-daily ~/.claude/skills/
+cp agents/vault-analyst.md ~/.claude/agents/
+```
+</details>
+
+## Use cases
+
+- Use it when you finish a Claude Code session and want a structured record of what you did, decided, and changed.
+- Use it when you make an important decision mid-session and want the rationale captured before you forget it.
+- Use it when you switch contexts and want to checkpoint the work so far.
+- Use it after two or more weeks of logs to find which manual workflows you repeat and should automate.
+- Use it when you want to see your own time and productivity patterns—deep work versus admin, day-of-week clustering.
+- Use it when you need concrete, evidence-backed skill or agent build recommendations instead of guesses.
+
+## How it works
 
 Two tools. One feedback loop.
 
@@ -71,6 +104,46 @@ After a few weeks of logs, run `@vault-analyst`. It reads your daily notes and s
 - **Friction points** (what blocks you repeatedly)
 - **Automation candidates** (specific skills/agents to build)
 
+`@vault-analyst` is read-only. It observes, analyzes, and recommends; it never modifies your vault.
+
+### The compounding effect
+
+Week 1: You log sessions. Nothing special yet.
+
+Week 4: Vault-analyst spots your Friday financial review pattern. You build a skill.
+
+Week 8: That skill appears in your logs. Vault-analyst notices you always run it *after* checking email. Suggests an agent that coordinates both.
+
+Week 12: Your system now handles things you used to do manually. Your logs shift to higher-level work. Vault-analyst notices *that* pattern too.
+
+**The more you log, the more patterns emerge. The more patterns, the better your automation. The better your automation, the more valuable work you log.**
+
+### What makes good logs
+
+**Specific outcomes:**
+- ✅ "Created inbox-processor with local_classify integration"
+- ❌ "Worked on inbox stuff"
+
+**Decisions with reasoning:**
+- ✅ "Chose hybrid local/cloud pattern because local model accuracy was only 66%"
+- ❌ "Made some decisions about the approach"
+
+**Linked files:**
+- ✅ "Modified [[inbox-processor]] and [[vault-analyst]]"
+- ❌ "Changed some files"
+
+The quality of your logs determines the quality of vault-analyst's recommendations.
+
+## Example
+
+After two or more weeks of logs, ask the analyst what to automate:
+
+```
+@vault-analyst what should I automate?
+```
+
+It returns a report citing the specific patterns behind each recommendation. Illustrative output:
+
 ```markdown
 ## Vault Analysis Report
 
@@ -91,40 +164,23 @@ After a few weeks of logs, run `@vault-analyst`. It reads your daily notes and s
 - **Effort to build:** Low (compose existing skills)
 ```
 
-## The Compounding Effect
+Other invocations:
 
-Week 1: You log sessions. Nothing special yet.
+```
+# Full analysis of the last 30 days
+@vault-analyst analyze my vault
 
-Week 4: Vault-analyst spots your Friday financial review pattern. You build a skill.
+# Time and productivity patterns
+@vault-analyst what are my productivity patterns?
+```
 
-Week 8: That skill appears in your logs. Vault-analyst notices you always run it *after* checking email. Suggests an agent that coordinates both.
+## Configuration
 
-Week 12: Your system now handles things you used to do manually. Your logs shift to higher-level work. Vault-analyst notices *that* pattern too.
-
-**The more you log, the more patterns emerge. The more patterns, the better your automation. The better your automation, the more valuable work you log.**
-
-## Requirements
+Requirements:
 
 - **Daily notes in Obsidian** — Format: `00 Daily/YYYY/YYYYMMDD.md` (configurable)
 - **Claude Code** — These are Claude Code skills/agents
 - **Consistency** — The system learns from repetition. Sporadic logging = weak patterns.
-
-## Installation
-
-```bash
-# Clone the pack
-git clone https://github.com/aplaceforallmystuff/daily-patterns-pack.git
-cd daily-patterns-pack
-
-# Run the installer
-./install.sh
-
-# Or manually copy
-cp -r skills/log-to-daily ~/.claude/skills/
-cp agents/vault-analyst.md ~/.claude/agents/
-```
-
-## Configuration
 
 Edit the daily note path in `log-to-daily/SKILL.md`:
 
@@ -136,61 +192,7 @@ Path: `00 Daily/YYYY/YYYYMMDD.md`
 
 Adjust to match your vault structure.
 
-## Usage
-
-### Daily Logging
-
-```
-# End of session
-/log-to-daily
-
-# After significant work
-/log-to-daily
-
-# When you made an important decision
-/log-to-daily
-```
-
-### Pattern Analysis
-
-```
-# After 2+ weeks of logs
-@vault-analyst analyze my vault
-
-# Focused analysis
-@vault-analyst what should I automate?
-
-# Time patterns
-@vault-analyst what are my productivity patterns?
-```
-
-## What Makes Good Logs
-
-**Specific outcomes:**
-- ✅ "Created inbox-processor with local_classify integration"
-- ❌ "Worked on inbox stuff"
-
-**Decisions with reasoning:**
-- ✅ "Chose hybrid local/cloud pattern because local model accuracy was only 66%"
-- ❌ "Made some decisions about the approach"
-
-**Linked files:**
-- ✅ "Modified [[inbox-processor]] and [[vault-analyst]]"
-- ❌ "Changed some files"
-
-The quality of your logs determines the quality of vault-analyst's recommendations.
-
-## The Philosophy
-
-Most AI tools optimize for single sessions. This pack optimizes for *months*.
-
-Your daily notes become training data—not for an AI model, but for your personal automation system. Every session logged is a data point. Every pattern detected is an automation waiting to be built.
-
-**You're not just using Claude. You're teaching your vault to work like you do.**
-
----
-
-## Files Included
+### Files included
 
 ```
 daily-patterns-pack/
@@ -204,9 +206,17 @@ daily-patterns-pack/
 └── README.md
 ```
 
+## Philosophy
+
+Most AI tools optimize for single sessions. This pack optimizes for *months*.
+
+Your daily notes become training data—not for an AI model, but for your personal automation system. Every session logged is a data point. Every pattern detected is an automation waiting to be built.
+
+**You're not just using Claude. You're teaching your vault to work like you do.**
+
 ## License
 
-MIT — Use freely, build on it, make it yours.
+MIT — see [LICENSE](LICENSE).
 
 ---
 
