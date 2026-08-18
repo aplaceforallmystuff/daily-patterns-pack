@@ -1,0 +1,6 @@
+{
+  "name": "daily-patterns-pack",
+  "description": "Log Claude Code sessions to Obsidian daily notes, analyze patterns, and build automations. A feedback loop that learns how you work.",
+  "version": "1.0.0",
+  "author": { "name": "Jim Christian", "email": "hello@jimchristian.net" }
+}
