@@ -29,7 +29,7 @@ Claude doesn't remember between sessions. Your daily notes do—but only if you 
 ```bash
 # In Claude Code:
 /plugin marketplace add aplaceforallmystuff/marketplace
-/plugin install daily-patterns-pack@jim-christian
+/plugin install daily-patterns-pack@aplaceforallmystuff
 ```
 
 <details>
