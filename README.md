@@ -214,6 +214,10 @@ Your daily notes become training data—not for an AI model, but for your person
 
 **You're not just using Claude. You're teaching your vault to work like you do.**
 
+## Need help putting AI tools to work?
+
+I build Claude Code setups like this one for my own work, and I help teams set up AI tools they can trust: implementation, security review of agent permissions and data handling, and training. See [jimchristian.net/work](https://jimchristian.net/work/) or book a [discovery session](https://jimchristian.net/discovery/).
+
 ## License
 
 MIT — see [LICENSE](LICENSE).
